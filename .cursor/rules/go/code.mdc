@@ -1,0 +1,222 @@
+---
+description: 
+globs: **/*.go
+alwaysApply: false
+---
+# Code rules
+
+---
+
+## name: Effective Go
+
+- Use gofmt to format your code automatically. Don’t fight the formatter.
+- Write clear and concise package names. Use lowercase, single-word names without underscores -r mixed caps.
+- Follow Go naming conventions:
+- Use MixedCaps or mixedCaps for multiword names, not underscores
+- Capitalize exported names
+- Use short, descriptive names for variables and functions
+- Utilize Go’s built-in error handling. Return errors as values, not exceptions.
+- Take advantage of multiple return values, especially for error handling.
+- Use defer for cleanup operations like closing files or unlocking mutexes.
+- Prefer composition over inheritance. Use embedding to include functionality from other -ypes.
+- Make use of interfaces for abstraction. Define interfaces for the methods you need.
+- Utilize Go’s concurrency primitives:
+- Use goroutines for concurrent tasks
+- Use channels for communication between goroutines
+- Remember: “Don’t communicate by sharing memory; share memory by communicating”
+- Leverage the blank identifier (\_) when you need to ignore return values.
+- Use type switches to handle multiple types in interfaces.
+- Write clear documentation comments for packages, functions, and types.
+- Avoid unnecessary else clauses. Handle errors early and return.
+- Use named return values when it improves clarity.
+- Make good use of the init() function for package initialization when needed.
+- Remember that semicolons are mostly implicit in Go. Don’t add them unnecessarily.
+- Use the built-in testing package for unit tests.
+- Utilize Go’s powerful slice and map types effectively.
+- Remember to check for nil before dereferencing pointers.
+- Use the context package for managing cancellations and deadlines across API boundaries.
+- Follow the principle of “Accept interfaces, return structs” in your API design.
+- Use go vet and golint tools regularly to catch common mistakes and style issues.
+
+## Formatting
+
+- Always format Go code according to standard Go conventions. Use tabs for indentation, not spaces. Don't worry about line length, but use an extra tab for wrapped lines. Minimize parentheses in control structures.
+- Prefer line comments (// ...) for normal code comments. Use block comments (/\* \*/) primarily for package documentation or to temporarily disable large code sections.
+
+## Naming
+
+- Use short, concise, lowercase, single-word names without underscores or mixedCaps for packages.
+- Name single-method interfaces by the method name plus an 'er' suffix (Reader, Writer, etc.).
+- Use MixedCaps (PascalCase for exported, camelCase for unexported) rather than underscores to write multiword names.
+- For a field named 'owner', name the getter simply 'Owner()' (not 'GetOwner()'). A setter should be named 'SetOwner()'.
+
+## Control Structures
+
+- Omit unnecessary else blocks after returns. When an if statement ends with a terminal statement (return, break, etc.), eliminate the else.
+- Use appropriate for loop forms: 'for init; condition; post {}', 'for condition {}' (while), 'for {}' (infinite), or 'for key, value := range collection {}'.
+- Use Go's flexible switch statements. Cases can be comma-separated lists. Use switch without an expression as an alternative to if-else chains.
+
+## Functions and Methods
+
+- Use multiple return values, typically with the error as the last return value: 'func Name() (result, err error)'.
+- Use named return parameters when they clarify which returned value is which.
+- Use defer statements for cleanup operations, placing them near the resource acquisitions they clean up.
+- Use pointer receivers when the method needs to modify the receiver or when the receiver is large.
+
+## Data Structures
+
+- Use 'new(T)' to allocate zeroed memory for a type. Use 'make(T, args)' only for slices, maps, and channels.
+- Prefer slices over arrays in most cases for sequences of data.
+- Use the comma-ok idiom with maps to distinguish between missing entries and zero values: 'value, ok := map[key]'.
+- Use embedding for composition rather than trying to simulate inheritance.
+
+## Error Handling
+
+- Return error values explicitly as the last return value with descriptive context.
+- Check errors immediately and handle them explicitly. Avoid using \_ to ignore errors.
+- Use panic only for exceptional conditions that indicate programming errors, not for normal error handling.
+
+## Concurrency
+
+- Follow the principle 'Do not communicate by sharing memory; instead, share memory by communicating.'
+- Use goroutines for concurrent execution with proper coordination through channels or other synchronization.
+- Choose unbuffered channels for synchronization points, buffered channels as semaphores or to limit throughput.
+
+## Interfaces
+
+- Create small, focused interfaces with only the methods necessary, preferably with just one or two methods.
+- Accept interfaces as parameters to be more flexible, but return concrete types from functions.
+- Focus interfaces on what actions are available rather than how they're implemented.
+
+## General Practices
+
+- Use composite literals for concise initialization of structs, slices, maps, and arrays.
+- Use the blank identifier (\_) to explicitly ignore unwanted values.
+- Use init functions sparingly and only for tasks that cannot be accomplished through variable initialization.
+
+- Leverage Go’s static typing with clear, well-defined types and interfaces.
+- Optimize for readability and maintainability over premature optimization.
+- Write modular code using separate packages or files for distinct concerns (e.g., models, data handling, evaluation).
+- Follow idiomatic Golang best practices, including error handling and concurrency patterns.
+- Focus on providing clear suggestions and recommendations to assist with Golang coding.
+- Use dependency injection by passing external dependencies as arguments to enhance testability.
+- Keep the code simple by adhering to KISS (Keep It Simple, Stupid) and YAGNI (You Aren't Gonna Need It) principles.
+- Prioritize unit testing with Go’s built-in testing framework.
+- Implement logging according to best practices without overengineering.
+- Target containerized deployments with a focus on Kubernetes environments.
+- Write pure Golang code, relying primarily on the standard library and only essential external packages.
+- Demonstrate expert-level proficiency in Go development.
+- Follow Docs for Developers for documentation recommendations - a book by Jared Bhatti, Sarah Corleissen, Jen Lambourne, David Nuñez, Heidi Waterhouse
+
+---
+
+## name: Go rules
+
+You are an expert AI programming assistant specializing in building APIs with Go, using the standard library's net/http package and the new ServeMux introduced in Go 1.22.
+
+Always use the latest stable version of Go (1.22 or newer) and be familiar with RESTful API design principles, best practices, and Go idioms.
+
+- Follow the user's requirements carefully & to the letter.
+- First think step-by-step - describe your plan for the API structure, endpoints, and data flow in pseudocode, written out in great detail.
+- Confirm the plan, then write code!
+- Write correct, up-to-date, bug-free, fully functional, secure, and efficient Go code for APIs.
+- Use the standard library's net/http package for API development:
+  - Utilize the new ServeMux introduced in Go 1.22 for routing
+  - Implement proper handling of different HTTP methods (GET, POST, PUT, DELETE, etc.)
+  - Use method handlers with appropriate signatures (e.g., func(w http.ResponseWriter, r \*http.Request))
+  - Leverage new features like wildcard matching and regex support in routes
+- Implement proper error handling, including custom error types when beneficial.
+- Use appropriate status codes and format JSON responses correctly.
+- Implement input validation for API endpoints.
+- Utilize Go's built-in concurrency features when beneficial for API performance.
+- Follow RESTful API design principles and best practices.
+- Include necessary imports, package declarations, and any required setup code.
+- Implement proper logging using the standard library's log package or a simple custom logger.
+- Consider implementing middleware for cross-cutting concerns (e.g., logging, authentication).
+- Implement rate limiting and authentication/authorization when appropriate, using standard library features or simple custom implementations.
+- Leave NO todos, placeholders, or missing pieces in the API implementation.
+- Be concise in explanations, but provide brief comments for complex logic or Go-specific idioms.
+- If unsure about a best practice or implementation detail, say so instead of guessing.
+- Offer suggestions for testing the API endpoints using Go's testing package.
+
+Always prioritize security, scalability, and maintainability in your API designs and implementations. Leverage the power and simplicity of Go's standard library to create efficient and idiomatic APIs.
+
+---
+
+## Code Quality Rules
+
+- Follow Go's official style guide and idioms from "Effective Go"
+- Use proper error handling with explicit checks (`if err != nil`)
+- Prefer composition over inheritance
+- Write concise, descriptive function and variable names
+- Include appropriate comments for complex logic and exported functions/types
+- Use proper package organization and naming
+- Implement proper resource cleanup (defer, close, etc.)
+- Apply consistent formatting (use gofmt standards)
+- Favor readability over excessive optimization
+- Use appropriate Go concurrency patterns (goroutines, channels, sync package)
+
+## Architecture and Design Rules
+
+- Follow SOLID principles where applicable
+- Use interfaces for flexible and testable code
+- Separate concerns (business logic, data access, presentation)
+- Design for testability
+- Create small, focused packages with clear responsibilities
+- Use dependency injection for better testing and flexibility
+- Implement proper error types and handling strategies
+- Design APIs with consistency and backward compatibility in mind
+- Apply appropriate design patterns but avoid over-engineering
+- Consider performance implications of design choices
+
+## Testing Rules
+
+- Write comprehensive unit tests for all functionality
+- Use table-driven tests for clear and concise test cases
+- Implement integration tests for critical paths
+- Use appropriate mocks and test doubles
+- Test error conditions and edge cases
+- Benchmark performance-critical code
+- Use Go's built-in testing tools (testing package, benchmarks)
+- Practice test-driven development when appropriate
+- Keep tests maintainable and understandable
+- Ensure adequate test coverage
+
+## Performance and Optimization Rules
+
+- Use appropriate data structures and algorithms
+- Profile before optimizing (pprof)
+- Optimize for memory efficiency in large-scale systems
+- Consider CPU and I/O bound operations
+- Use buffered operations for I/O intensive tasks
+- Apply concurrency with caution and purpose
+- Design for scalability from the beginning
+- Minimize allocations in performance-critical paths
+- Use sync.Pool for frequent allocations
+- Consider cache-friendly data structures
+
+## Security Rules
+
+- Validate all user inputs
+- Sanitize data before using in SQL, templates, etc.
+- Use secure cryptographic practices
+- Implement proper authentication and authorization
+- Handle sensitive data carefully (passwords, tokens)
+- Use the principle of least privilege
+- Check for common security vulnerabilities (OWASP)
+- Consider rate limiting for public APIs
+- Implement proper logging (without sensitive data)
+- Keep dependencies updated and scan for vulnerabilities
+
+## Documentation Rules
+
+- Document all exported functions, types, and constants
+- Provide clear package documentation
+- Include examples in documentation when helpful
+- Document concurrency considerations
+- Explain non-obvious design choices
+- Document known limitations and edge cases
+- Include usage examples for complex APIs
+- Keep documentation up-to-date with code changes
+- Document error conditions and handling
+- Use godoc compatible documentation style

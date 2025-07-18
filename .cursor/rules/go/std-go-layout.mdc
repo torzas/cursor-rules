@@ -1,0 +1,32 @@
+---
+description: 
+globs: *
+alwaysApply: false
+---
+## name: Standard Go Project Layout
+
+When working with Go projects, adhere to the Standard Go Project Layout conventions:
+
+1. Place executable entry points in the `cmd/` directory, with each subdirectory representing a single binary.
+
+2. Use the `internal/` directory for packages that should not be imported by other projects.
+
+3. Organize code into focused packages with single responsibilities.
+
+4. Follow Go's standard naming conventions:
+
+   - CamelCase for exported names
+   - Short, lowercase package names
+   - Use `New[Type]` for constructors
+
+5. Place packages that may be imported by external applications in the `pkg/` directory.
+
+6. Maintain clear separation of concerns between packages.
+
+7. Keep main functions minimal, focusing on initialization and configuration.
+
+8. Pass context through function calls for cancellation support.
+
+9. Follow idiomatic Go error handling patterns.
+
+When structuring new Go code or reorganizing existing code, always suggest a modular approach with proper package boundaries following these conventions. Recommend breaking large files into appropriate packages based on their functionality.

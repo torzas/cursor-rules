@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Language Rule
+
+- Always reply to the user in Russian.
+- All code, comments, and technical documentation must be written in English.
+- Do not switch languages unless explicitly instructed.

@@ -1,0 +1,119 @@
+---
+description: 
+globs: **/*.go
+alwaysApply: false
+---
+# Unified Go Style and Best Practices Guide
+
+This document consolidates community-sourced Go programming rules and best practices into a unified, coherent reference. It emphasizes idiomatic Go, clean architecture, maintainability, and practical production concerns.
+
+---
+
+## Formatting & Style
+
+- Always use `gofmt` or `goimports`.
+- Use tabs for indentation, not spaces.
+- Avoid semicolons and unnecessary parentheses.
+- Prefer `//` for line comments; use `/* */` for large blocks or package-level docs.
+- Use `godoc`-compatible comment style.
+
+## Naming Conventions
+
+- Package names: short, lowercase, single word, no underscores.
+- Exported identifiers: `MixedCaps` (PascalCase).
+- Unexported identifiers: `mixedCaps` (camelCase).
+- Interfaces: named as "doers" (e.g. `Reader`, `Writer`).
+- Getters: use `Name()` not `GetName()`.
+- Setters: use `SetName()`.
+
+## Functions & Methods
+
+- Keep functions small, single-purpose.
+- Use multiple return values: `value, err := doSomething()`.
+- Use named return values where they aid clarity.
+- Place `defer` near the resource acquisition.
+- Use pointer receivers when modifying the receiver or the receiver is large.
+
+## Control Flow
+
+- Return early to reduce nesting; avoid `else` after terminal branches.
+- Use Go's flexible `for` loop variants.
+- Use `switch` over long if-else chains. Use type switches when handling interfaces.
+
+## Error Handling
+
+- Return errors as the final return value.
+- Check errors immediately with `if err != nil {}`.
+- Add context to errors using `fmt.Errorf("...: %w", err)`.
+- Use `panic` only for truly unrecoverable errors.
+- Avoid discarding errors with `_`.
+
+## Concurrency
+
+- Follow: "Don't communicate by sharing memory; share memory by communicating."
+- Use goroutines for parallelism.
+- Coordinate via channels or the `sync` package (`WaitGroup`, `Mutex`).
+- Use `context` for cancellation, timeouts, and API boundaries.
+- Prefer small, scoped concurrent components.
+
+## Interfaces
+
+- Accept interfaces, return concrete types.
+- Focus interfaces on behaviors, not data.
+
+## Data Structures
+
+- Prefer slices over arrays.
+- Use `make()` for slices, maps, channels; `new()` for others.
+- Use the `comma-ok` idiom with maps.
+- Use embedding for composition instead of inheritance.
+
+## Code Quality Practices
+
+- Prefer readable, maintainable code over premature optimization.
+- Use composition over inheritance.
+- Apply dependency injection.
+- Separate business logic, I/O, and presentation layers.
+- Modularize with clear package boundaries.
+- Adhere to KISS and YAGNI principles.
+- Use logging appropriately without overengineering.
+
+## Testing
+
+- Use Go's built-in `testing` package.
+- Write unit tests with coverage.
+- Use table-driven tests for clarity.
+- Use mocks, fakes, or interfaces to isolate components.
+- Benchmark critical code.
+- Avoid fragile tests; test behaviors, not implementation details.
+
+## Performance & Optimization
+
+- Profile before optimizing (e.g., with `pprof`).
+- Use efficient algorithms and data structures.
+- Reduce memory allocations in hot paths.
+- Use `sync.Pool` for reusable objects.
+- Use buffered I/O and batching for performance.
+- Minimize goroutines when unnecessary.
+
+## Security Best Practices
+
+- Validate and sanitize user input.
+- Escape data before inserting into SQL, HTML, etc.
+- Store secrets securely.
+- Apply the principle of least privilege.
+- Use secure cryptographic primitives.
+- Limit public API abuse (rate limiting, auth).
+- Keep dependencies up-to-date and scan for vulnerabilities.
+
+## Documentation
+
+- Document all exported entities (types, functions, constants).
+- Write package-level summaries.
+- Include examples for complex features.
+- Explain design decisions and limitations.
+- Document concurrency usage where applicable.
+
+---
+
+> This guide is based on established practices from "Effective Go", "Go Code Review Comments", the Go wiki, and community-driven knowledge from open source contributors. Aim for simplicity, idiomatic usage, and long-term maintainability.
